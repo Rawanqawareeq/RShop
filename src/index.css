@@ -1,0 +1,33 @@
+:root{
+    --main-colors:#00008B;
+    --sec-color:#ADD8E6;
+ }
+.swiper{
+    padding: 10px;
+}
+.swiper-button-prev, .swiper-button-next {
+    color: var(--main-colors) !important;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background-color:white ;
+}
+.swiper-pagination-bullet{
+    background-color: var(--main-colors);
+}
+.swiper-custom-pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.categories-img img{
+    height: 150px;
+}
+.products img{
+    height: 400px;
+    width: 300px;
+}
+.Productsdes .Productsdes-subimg img{
+    width: 250px;
+    height: 250px;
+}
