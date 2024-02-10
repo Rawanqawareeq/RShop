@@ -2,7 +2,7 @@ import React from 'react'
 import{
   createBrowserRouter,
 }from "react-router-dom";
-import Layouts from './layouts';
+import Layouts from './layouts.jsx';
 import Home from '../component/web/home/Home.jsx';
 import DashboardHome from '../component/dashboard/home/Home.jsx';
 import Catogeries from '../component/web/catogeries/Catogeries.jsx';
