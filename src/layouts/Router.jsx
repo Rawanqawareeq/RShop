@@ -18,9 +18,9 @@ import Login from '../component/auth/login/Login.jsx';
 import Register from '../component/auth/register/Register.jsx';
 import Sendcode from '../component/auth/Sendcode.jsx';
 import ForgetPassword from '../component/auth/ForgetPassword.jsx';
-import Layouts from './layouts.jsx';
 import Ckeckout from '../component/ckeckout/Ckeckout.jsx';
 import Order from '../component/web/profile/Order.jsx';
+import Layouts from './Layouts.jsx';
 export const router = createBrowserRouter([
   {
     path: "/",
