@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import UserContex from '../context/User';
-import './profile.css';
+import './Profile.css';
 import { Link, Outlet } from 'react-router-dom';
 export default function Profile() {
     
