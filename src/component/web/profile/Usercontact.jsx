@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import UserContex from '../context/User';
 
 export default function Usercontact() {
-    let {userData,isLoading,setIsLoading} = useContext(UserContex);
+    let {userData,isLoading} = useContext(UserContex);
     if(isLoading){
         return <p>is loading....</p>;
     }

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import UserContex  from '../context/User';
 import { CartContex } from '../context/Cart';
 export default function Navbar() {

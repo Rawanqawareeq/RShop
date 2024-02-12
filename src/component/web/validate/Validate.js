@@ -12,7 +12,12 @@ export const validationSchema = yup.object({
     email:yup.string().required("Email is reqired"),
   })
   export const forgetpasswordSchema = yup.object({
-    code:yup.string().required("code is reqired").length(4,'char must be 4 char '),
+    code:yup.string().required("code is reqired").length(4,'must be 4 char '),
     email:yup.string().required("Email is reqired"),
     password:yup.string().required("Password is required").min(3,"must be at least 3 char").max(15,"must be at most 15 char"),
+  })
+  export const validationOrderSchema = yup.object({
+    couponName:yup.string().min(3,"must be at least 3 char").max(30,"must be at most 30 char"),
+    address:yup.string().required("address is reqired"),
+    phone: yup.string().required('Phone number is required').matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/, 'Please enter a valid phone number')
   })

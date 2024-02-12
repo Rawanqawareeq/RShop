@@ -34,27 +34,6 @@ export default function Catogeries() {
       autoplay={{
         delay:1000
       }}
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
     >
     {data?.categories.length? data?.categories.map((catogory)=>
      

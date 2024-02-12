@@ -19,6 +19,7 @@ export default function Product() {
   }
   const addtocart  = async (productid)=>{
     const res = await addCartContex(productid);
+    
     if(res.message == 'success'){
       toast.success('Product Add successfuly', {
          position: "top-center",
@@ -45,7 +46,8 @@ export default function Product() {
       </div>
       <div className='col-md-12 py-5'>
       <div className='container'>
-      <div className='row Productsdes-subimg' >   
+      <div className='row Productsdes-subimg' >  
+
       </div> 
            <h5 className='pt-5 pe-5 text-start'>{data.name}</h5>
            <p className=' text-start'>{data.finalPrice}$</p>

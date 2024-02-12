@@ -2,7 +2,6 @@ import React from 'react'
 import{
   createBrowserRouter,
 }from "react-router-dom";
-import Layouts from './layouts.jsx';
 import Home from '../component/web/home/Home.jsx';
 import DashboardHome from '../component/dashboard/home/Home.jsx';
 import Catogeries from '../component/web/catogeries/Catogeries.jsx';
@@ -19,6 +18,9 @@ import Login from '../component/auth/login/Login.jsx';
 import Register from '../component/auth/register/Register.jsx';
 import Sendcode from '../component/auth/Sendcode.jsx';
 import ForgetPassword from '../component/auth/ForgetPassword.jsx';
+import Layouts from './layouts.jsx';
+import Ckeckout from '../component/ckeckout/Ckeckout.jsx';
+import Order from '../component/web/profile/Order.jsx';
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -65,6 +67,10 @@ export const router = createBrowserRouter([
       
     },
     {
+      path:"checkout",
+      element:<Ckeckout/>
+    },
+    {
       path: "profile",
       element: 
       <ProductRoute>
@@ -77,7 +83,12 @@ export const router = createBrowserRouter([
       {
         path:'contact',
         element:<Usercontact/>
+      },
+      {
+        path:'order',
+        element:<Order/>
       }
+
 
       ]
     },

@@ -11,6 +11,7 @@ export default function Profile() {
                 <nav>
                 <Link to='' >info</Link>
                 <Link to='contact' >contact</Link>
+                <Link to='order' >order</Link>
                 </nav>
            
         </div>

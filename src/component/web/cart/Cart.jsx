@@ -3,14 +3,27 @@ import './cart.css'
 import { useQuery } from 'react-query';
 import { CartContex } from '../context/Cart.jsx';
 import { Bounce, toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 export default function Cart() {
-
-  const {getCartContext,removeCartContext} = useContext(CartContex);
+  
+  const {getCartContext,removeCartContext,clearCart,incraseQuantityContext,decraseQuantityContext} = useContext(CartContex);
   const getcart= async ()=>{
     const res = await getCartContext();
     return res;
-
   }
+  const incraseQuantity= async(productId)=>{
+    const res = await incraseQuantityContext(productId);
+    
+    console.log(res);
+     
+  }
+  const decraseQuantity= async(productId,quantity)=>{
+    if(quantity > 1){
+      console.log(quantity);
+      const res = await decraseQuantityContext(productId);
+    }  
+  }
+  
   const removeitem = async (productId)=>{
     const res  = await removeCartContext(productId);
     if(res.message == 'success'){
@@ -27,7 +40,12 @@ export default function Cart() {
         });
     }
   }
-  const {data,isLoading} = useQuery('cart',getcart);
+  const getclearcart =async ()=>{
+    const res = await clearCart();
+   
+  }
+  const {data} = useQuery('cart',getcart);
+
   return (
     <div className="cart">
       <div className="container">
@@ -77,7 +95,7 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className="quantity">
-                      <button>
+                      <button onClick={()=>{decraseQuantity(product.productId,product.quantity)}} >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width={16}
@@ -95,7 +113,7 @@ export default function Cart() {
                         </svg>
                       </button>
                       <span>{product.quantity}</span>
-                      <button>
+                      <button onClick={()=>{incraseQuantity(product.productId)}} >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width={16}
@@ -117,6 +135,10 @@ export default function Cart() {
                   </div>)
                   :<h2>cart is empty</h2>
              }
+              <div className="ClearCart ">
+                  <a className='text-white '  onClick={getclearcart}>ClearCart</a>
+                </div>
+
             </div>
             <div className="cart-summary">
               <h2>Cart summary</h2>
@@ -148,7 +170,7 @@ export default function Cart() {
                   <span>$1345.00</span>
                 </div>
                 <div className="checkout">
-                  <a href="#">Chekout</a>
+                  <Link  to='/checkout'>Checkout</Link>
                 </div>
               </div>
             </div>
