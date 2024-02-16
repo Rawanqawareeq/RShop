@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import React from 'react'
 import { validationOrderSchema } from '../web/validate/Validate';
 import Input from '../pages/Input';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Ckeckout() {
     const navigate = useNavigate();

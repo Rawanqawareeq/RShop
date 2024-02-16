@@ -17,6 +17,9 @@ export  function UserContexProvider({children}) {
         console.log(data);
         setIsLoading(false);
       }
+      else{
+        return <h2>is loading ... </h2>
+      }
     }
     useEffect(()=>{
       getUserData();

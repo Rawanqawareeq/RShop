@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate, useParams} from 'react-router-dom'
 import UserContex  from '../context/User';
 import { CartContex } from '../context/Cart';
 export default function Navbar() {
@@ -15,6 +15,7 @@ export default function Navbar() {
     navigate('/');
     
   }
+
   return (
      <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
@@ -31,7 +32,7 @@ export default function Navbar() {
           <Link className="nav-link"  >Categories</Link>
         </li>  
         <li className="nav-item">
-          <a className="nav-link" href="#">Product</a>
+          <Link className="nav-link" to='/products'>Product</Link>
         </li>  
         {UserToken? <li className="nav-item">
           <Link className="nav-link" to="/cart">Cart <span className="badge text-bg-secondary">{count}</span></Link>

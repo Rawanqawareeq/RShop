@@ -21,6 +21,7 @@ import ForgetPassword from '../component/auth/ForgetPassword.jsx';
 import Ckeckout from '../component/ckeckout/Ckeckout.jsx';
 import Order from '../component/web/profile/Order.jsx';
 import Layouts from './Layouts.jsx';
+import Pagination from '../component/web/pagination/Pagination.jsx';
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
     {
       path: "products/:productsId",
       element: <Product />,
+    },
+    {
+      path: "products",
+      element: <Pagination/>,
     },
     {
       path:"cart",

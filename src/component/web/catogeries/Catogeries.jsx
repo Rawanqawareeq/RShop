@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export default function Catogeries() {
   const getCatogeries = async()=>{
-    const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/categories/active?page=1&limit=5`);
+    const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/categories/active?limit=9`);
    return data;
   }
   const {data,isLoading} = useQuery('web_categories',getCatogeries);
@@ -26,7 +26,7 @@ export default function Catogeries() {
      <Swiper
         modules={[Navigation, Pagination, Autoplay]}
       spaceBetween={50}
-      slidesPerView={2.5}
+      slidesPerView={7}
       navigation
       pagination={{ clickable: true,
                     el:'.swiper-custom-pagination'}}

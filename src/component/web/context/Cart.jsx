@@ -28,9 +28,7 @@ export default function CartContexProvider({children}) {
          const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/cart`,
          {headers:{Authorization:`Tariq__${token}`}});
          console.log(data);
-         
-                 return data;
-     
+         return data;
     }catch(error){
         
     }
