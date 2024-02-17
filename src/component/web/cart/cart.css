@@ -157,7 +157,7 @@ font-size:20px;
 }
 
 
- .checkout a, .ClearCart a{
+ .checkout a, .ClearCart{
     background-color: #141718;
     width:100%;
     display: flex;

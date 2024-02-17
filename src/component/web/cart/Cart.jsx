@@ -1,21 +1,20 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './cart.css'
 import { useQuery } from 'react-query';
 import { CartContex } from '../context/Cart.jsx';
 import { Bounce, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 export default function Cart() {
-  
+  const [data,setData] = useState(null);
   const {getCartContext,removeCartContext,clearCart,incraseQuantityContext,decraseQuantityContext} = useContext(CartContex);
   const getcart= async ()=>{
     const res = await getCartContext();
+    setData(res);
     return res;
   }
   const incraseQuantity= async(productId)=>{
-    const res = await incraseQuantityContext(productId);
-    
-    console.log(res);
-     
+    const res = await incraseQuantityContext(productId);     
   }
   const decraseQuantity= async(productId,quantity)=>{
     if(quantity > 1){
@@ -44,7 +43,10 @@ export default function Cart() {
     const res = await clearCart();
    
   }
-  const {data} = useQuery('cart',getcart);
+  
+  useEffect(()=>{
+    getcart();
+  },[data])
 
   return (
     <div className="cart">
@@ -135,8 +137,8 @@ export default function Cart() {
                   </div>)
                   :<h2>cart is empty</h2>
              }
-              <div className="ClearCart ">
-                  <a className='text-white '  onClick={getclearcart}>ClearCart</a>
+              <div className="ClearCart " >
+                  <button   onClick={getclearcart}>ClearCart</button>
                 </div>
 
             </div>

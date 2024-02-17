@@ -22,6 +22,7 @@ import Ckeckout from '../component/ckeckout/Ckeckout.jsx';
 import Order from '../component/web/profile/Order.jsx';
 import Layouts from './Layouts.jsx';
 import Pagination from '../component/web/pagination/Pagination.jsx';
+import Review from '../component/web/products/review.jsx';
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
     {
       path: "products",
       element: <Pagination/>,
+    },
+    {
+      path: "products/:productsId/review",
+      element: <Review/>,
     },
     {
       path:"cart",

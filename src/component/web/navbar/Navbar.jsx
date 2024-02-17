@@ -8,14 +8,11 @@ export default function Navbar() {
  
   let navigate = useNavigate();
   const logout = ()=>{
-  
     localStorage.removeItem("UserToken");
-
     setUserToken(null);
     navigate('/');
     
   }
-
   return (
      <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">

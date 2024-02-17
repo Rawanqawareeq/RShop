@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export default function Catogeries() {
   const getCatogeries = async()=>{
-    const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/categories/active?limit=9`);
+  const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/categories/active?limit=9`);
    return data;
   }
   const {data,isLoading} = useQuery('web_categories',getCatogeries);

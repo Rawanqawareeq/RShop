@@ -19,6 +19,7 @@ export default function Pagination() {
         
         const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${page}&limit=2`);
         setproduct(data);
+        console.log(product);
         setLoading(false);
         return data;
        }catch(error){}
@@ -39,6 +40,7 @@ export default function Pagination() {
      <div className='col-md-6' key={product._id} >
       <img src={product.mainImage.secure_url} width='250px' height='350px' />
         <h2  >{product.name}</h2>
+        <Link to={`/products/${product._id}`}>Details</Link>
      </div>
    ):<h2>no product</h2>}
     </div>

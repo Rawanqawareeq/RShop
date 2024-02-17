@@ -21,3 +21,7 @@ export const validationSchema = yup.object({
     address:yup.string().required("address is reqired"),
     phone: yup.string().required('Phone number is required').matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/, 'Please enter a valid phone number')
   })
+  export const reviewSchema = yup.object({
+    comment:yup.string().required("comment is reqired").min(3,"must be at least 3 char").max(30,"must be at most 30 char"),
+    rating:yup.string().required("rating is required").min(1,"must be at least 1 char").max(5,"must be at most 30 char"),
+  })

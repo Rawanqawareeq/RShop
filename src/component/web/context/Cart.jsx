@@ -18,7 +18,7 @@ export default function CartContexProvider({children}) {
           getcountCartContext();
             return data;
     }catch(error){
-       ;
+       
     }
 
   }
