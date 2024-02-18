@@ -15,9 +15,9 @@ export default function Review() {
     rating:'',
   };
   const onSubmit=async(review)=>{
+    const token = localStorage.getItem("UserToken");
     const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/products/${productsId}/review`,review,
     {headers:{Authorization:`Tariq__${token}`}});
-    console.log(data);
   };
   const formik = useFormik({
     initialValues,
@@ -35,7 +35,7 @@ export default function Review() {
     },
     {
       id:'rating',
-      type:'number',
+      type:'text',
       name:'rating',
       title :'User rating',
       value:formik.values.rating,

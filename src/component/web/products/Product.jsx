@@ -72,7 +72,7 @@ useEffect(()=>{
 }
       </div>       
       </div>
-      <Link to={`/products/${productsId}/review`}>add review</Link>
+      <Link to={`/products/${data.product.id}/review`}>add review</Link>
        <p>avg rating :{[...Array(5)].map((star,index) => {  return <FaStar size={50} color={index < avgrat?'#ffc107':'e4e5e9'} key={index}/>})}</p>
        <h5 className='pt-5 pe-5 text-start'>{data.product.name}</h5>
            <p className=' text-start'>{data.product.finalPrice}$</p>
