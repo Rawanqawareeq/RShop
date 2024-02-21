@@ -4,9 +4,9 @@ export default function Input({type='text',id,name,title,value,errors,onChange,o
   return (
     
   <>
-     <div className="input-group mb-3">
-     <label htmlFor={id} >{title}</label>
-    <input type={type} className="form-control" name={name} value={value}  id={id} onChange={onChange} onBlur={onBlur} />
+     <div className=" mb-3">
+     <label   htmlFor={id} >{title}</label>
+    <input type={type}  name={name} value={value}  id={id} onChange={onChange} onBlur={onBlur} />
     {touched[name]&&errors[name]&&<p className='text text-danger'>{errors[name]}</p>}
  
    </div>

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { sendcodeSchema } from '../web/validate/Validate.js';
 import Input from '../pages/Input.jsx';
 import UserContex, { UserContexProvider } from '../web/context/User.jsx';
+import './auth.css';
 export default function Sendcode() {
   let {setUserToken} = useContext(UserContex);
     const navigate = useNavigate();
@@ -69,10 +70,11 @@ export default function Sendcode() {
       );
       return (
         <>
-        <div className='container'>
-        <form onSubmit={formik.handleSubmit}>
+        <div className='form mt-5  py-5'>
+        <form className='content' onSubmit={formik.handleSubmit}>
+        <h2 className='mb-3'>Enter Email</h2>
           {renderInputs}
-          <button type='submit' >sendcode</button>
+          <button type='submit'className='mt-2 submit' >sendcode</button>
          </form>
         </div>
         

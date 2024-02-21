@@ -20,12 +20,14 @@ export default function Cart() {
     if(quantity > 1){
       console.log(quantity);
       const res = await decraseQuantityContext(productId);
+      return res;
     }  
   }
   
   const removeitem = async (productId)=>{
     const res  = await removeCartContext(productId);
-    if(res.message == 'success'){
+    console.log(res);
+    //if(res.message == 'success'){
       toast.error('Product  Delete successfuly', {
         position: "top-center",
         autoClose: 5000,
@@ -37,7 +39,7 @@ export default function Cart() {
         theme: "colored",
         transition: Bounce,
         });
-    }
+    //}
   }
   const getclearcart =async ()=>{
     const res = await clearCart();
@@ -77,7 +79,7 @@ export default function Cart() {
                       <div className="product-details">
                         <h2>{product.details.name}</h2>
                         <span>Color:black</span>
-                        <a href='#' onClick={()=>{removeitem(product.details._id)}}>
+                        <Link  onClick={()=>{removeitem(product.details._id)}}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width={24}
@@ -93,7 +95,7 @@ export default function Cart() {
                             />
                           </svg>
                           remove
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="quantity">

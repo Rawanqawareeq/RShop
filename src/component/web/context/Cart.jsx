@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import React from 'react'
 import { Bounce, toast } from "react-toastify";
 
@@ -7,15 +7,15 @@ import { Bounce, toast } from "react-toastify";
 export const CartContex = createContext(null);
 
 export default function CartContexProvider({children}) {
-   let [count,setcount] = useState(0);
-
+   let [count,setCount] = useState(0);
   const addCartContex = async (productId)=>{
     try{
           const token = localStorage.getItem("UserToken");
           const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/cart`,
           {productId},
           {headers:{Authorization:`Tariq__${token}`}});
-          getcountCartContext();
+          getCartContext();
+          setCount(++count);
             return data;
     }catch(error){
        
@@ -27,7 +27,6 @@ export default function CartContexProvider({children}) {
          const token = localStorage.getItem("UserToken");
          const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/cart`,
          {headers:{Authorization:`Tariq__${token}`}});
-         console.log(data);
          return data;
     }catch(error){
         
@@ -35,14 +34,15 @@ export default function CartContexProvider({children}) {
   }
   const getcountCartContext=async ()=>{
     try{
-         const token = localStorage.getItem("UserToken");
-         const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/cart`,
-         {headers:{Authorization:`Tariq__${token}`}});
-         data.products.map((product)=>{
-          setcount(count + (data.count*product.quantity));
-         })
-        
-         return data.count;
+         let countproduct = 0; 
+         const data = await getCartContext();
+        await data.products.map((product)=>
+          { countproduct = countproduct + product.quantity
+            console.log(product);
+            setCount(countproduct);
+          } )
+         console.log(count);
+         return count;
      
     }catch(error){
        
@@ -50,14 +50,23 @@ export default function CartContexProvider({children}) {
   }
   const removeCartContext = async(productId)=>{
     try{
+      const products = await getCartContext();
+      const getproduct = products.products.find((ele)=>{
+        console.log(ele);
+        return ele.productId == productId;
+      })
+       let countproduct = count - getproduct.quantity; 
+
       const token = localStorage.getItem('UserToken');
       const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/removeItem`,
       {productId},
       {headers:{Authorization:`Tariq__${token}`}});
+      setCount(countproduct);
       return data;
     }catch(error){
        console.log(error);
     }
+
   }
   const clearCart= async()=>{
     if(count <= 0){
@@ -87,7 +96,8 @@ export default function CartContexProvider({children}) {
     const token = localStorage.getItem('UserToken');
     const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/incraseQuantity`,{productId},
     {headers:{authorization:`Tariq__${token}`}});
-    setcount(++count);
+    getCartContext();
+    setCount(++count);
     return data;
 
   }
@@ -95,14 +105,18 @@ export default function CartContexProvider({children}) {
     const token = localStorage.getItem('UserToken');
     const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/decraseQuantity`,{productId},
      {headers:{authorization:`Tariq__${token}`}}); 
-    setcount(--count);
+    setCount(--count);
     return data;
   }
-
+ 
+  useEffect(
+    ()=>{
+    getcountCartContext();
+    },[])
 
   
   
-  return <CartContex.Provider value={{addCartContex,getCartContext,removeCartContext,count,getcountCartContext,setcount,clearCart,incraseQuantityContext,decraseQuantityContext}}>
+  return <CartContex.Provider value={{addCartContex,getCartContext,removeCartContext,count,getcountCartContext,clearCart,incraseQuantityContext,decraseQuantityContext}}>
     {children}
   </CartContex.Provider>;
 }

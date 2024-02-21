@@ -7,6 +7,7 @@ import {Bounce, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Input from '../pages/Input.jsx';
 import { forgetpasswordSchema} from '../web/validate/Validate.js';
+import './auth.css';
 export default function ForgetPassword() {
     const navigate = useNavigate();
   const initialValues={
@@ -81,10 +82,11 @@ export default function ForgetPassword() {
   );
   return (
     <>
-    <div className='container'>
-    <form onSubmit={formik.handleSubmit} encType='multipart/form-data' >
+    <div className='form mt-5  py-5'>
+    <form className='content ms-3 py-5'  onSubmit={formik.handleSubmit}  >
+    <h2 className='mb-3'>Enter Infromation</h2>
       {renderInputs}
-      <button type='submit' disabled={!formik.isValid} >Upadte</button>
+      <button type='submit' disabled={!formik.isValid} className='mt-2 submit' >Upadte</button>
      </form>
     </div>
     

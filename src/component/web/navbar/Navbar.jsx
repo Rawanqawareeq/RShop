@@ -1,18 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams} from 'react-router-dom'
 import UserContex  from '../context/User';
 import { CartContex } from '../context/Cart';
+import './navbar.css';
 export default function Navbar() {
   let {UserToken,setUserToken,userData} = useContext(UserContex);
   let{count} = useContext(CartContex);
- 
   let navigate = useNavigate();
+
+ 
+
   const logout = ()=>{
     localStorage.removeItem("UserToken");
     setUserToken(null);
-    navigate('/');
-    
+    navigate('/'); 
   }
+  
   return (
      <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
@@ -39,7 +42,7 @@ export default function Navbar() {
       <ul className='navbar-nav me-auto'>
      <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          {userData?userData.userName:'Account'}
+          {UserToken != null?userData?.userName:'Account'}
           </a>
           <ul className="dropdown-menu">
            {UserToken==null? <>

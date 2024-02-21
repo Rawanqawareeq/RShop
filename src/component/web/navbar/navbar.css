@@ -1,0 +1,29 @@
+.navbar{
+   width: 100%;
+    position: fixed;
+    z-index: 10;
+ 
+  }
+  .navbar img{
+      height: 60px;
+  }
+  .navbar-nav .nav-link.active, .navbar-nav .nav-link.show  {
+     border-radius: 16px ;
+     background-color: var(--sec-color);
+     color: white;
+  }
+  .navbar-nav .nav-link .active, .navbar-nav .nav-link.show  {
+    border-radius: 16px ;
+    background-color: var(--sec-color);
+    color: white;
+ }
+  .dropdown-item:focus, .dropdown-item:hover {
+      color: white;
+      background-color:var(--sec-color) !important;
+  }
+  .dropdown-item{
+    color: var(--main-colors) !important;
+  }
+  .navbar  .nav-link{
+      color:var(--main-colors) ;
+  }

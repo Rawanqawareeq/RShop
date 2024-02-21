@@ -5,6 +5,7 @@ import { validationSchema } from '../../web/validate/Validate.js';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import {Bounce, toast } from 'react-toastify';
+import '../auth.css';
 export default function Register() {
   const initialValues={
     userName:'',
@@ -93,10 +94,11 @@ export default function Register() {
   );
   return (
     <>
-    <div className='container'>
-    <form onSubmit={formik.handleSubmit} encType='multipart/form-data' >
+    <div className='form container'>
+    <form className='content ms-3 py-5' onSubmit={formik.handleSubmit} encType='multipart/form-data' >
+    <h2 className='mb-3'>create account</h2>
       {renderInputs}
-      <button type='submit' disabled={!formik.isValid} >Register</button>
+      <button type='submit' className='mt-2 submit'  disabled={!formik.isValid} >Register</button>
      </form>
     </div>
     
