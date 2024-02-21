@@ -22,7 +22,7 @@ import Ckeckout from '../component/ckeckout/Ckeckout.jsx';
 import Order from '../component/web/profile/Order.jsx';
 import Layouts from './Layouts.jsx';
 import Pagination from '../component/web/pagination/Pagination.jsx';
-import Review from '../component/web/products/review.jsx';
+import Review from '../component/web/products/Review.jsx';
 export const router = createBrowserRouter([
   {
     path: "/",
