@@ -7,15 +7,11 @@ export default function Navbar() {
   let {UserToken,setUserToken,userData} = useContext(UserContex);
   let{count} = useContext(CartContex);
   let navigate = useNavigate();
-
- 
-
   const logout = ()=>{
     localStorage.removeItem("UserToken");
     setUserToken(null);
     navigate('/'); 
   }
-  
   return (
      <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">

@@ -38,7 +38,7 @@ export default function Catogeries() {
     {data?.categories.length? data?.categories.map((catogory)=>
      
         <SwiperSlide  key={catogory._id}>
-           <Link to={`products/catogory/${catogory._id}`}>
+           <Link to={`/products/catogory/${catogory._id}`}>
            <img src={catogory.image.secure_url}/>
            </Link>
         

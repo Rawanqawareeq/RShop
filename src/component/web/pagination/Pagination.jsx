@@ -2,24 +2,19 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom';
-
+import Catogeries from '../catogeries/Catogeries.jsx';
+import './../catogeries/catogeries.css';
 export default function Pagination() {
     let [product,setproduct] = useState([]);
     let [page,setPage] = useState(1);
     let [limit,setlimit] = useState(2);
     let[loading,setLoading] = useState(true);
-    const getPage=async(index)=>{
-      await setPage(index);
-      setLoading(true);
-      await getPagination();
-
-    }
-    const getPagination =  async()=>{
+    const getPagination =  async(Page=1)=>{
        try{
-        
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${page}&limit=2`);
+        console.log(page);
+        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${Page}&limit=2`);
         setproduct(data);
-        console.log(product);
+        console.log(loading);
         setLoading(false);
         return data;
        }catch(error){}
@@ -27,37 +22,75 @@ export default function Pagination() {
    
    
     useEffect(()=>{
-      getPagination(); 
-    },[page]);
+       getPagination(); 
+    },[]);
     if(loading){
       return<h2>loading...</h2>
     }
 
   return (
-   <div className='container'>
+    <div>
+      <header> <Catogeries/></header>
+        <section className='product py-5'>
+   
+    <div className='container py-5'>
     <div className='row' >
     {loading == false ?product.products.map((product)=>
      <div className='col-md-6' key={product._id} >
-      <img src={product.mainImage.secure_url} width='250px' height='350px' />
-        <h2  >{product.name}</h2>
-        <Link to={`/products/${product._id}`}>Details</Link>
+        <div className=' position-relative products  ' key={product._id}>
+    
+    <div
+     className="z-2 overlay position-absolute d-flex justify-content-center rounded align-items-center top-0 bottom-0 start-0 end-0">
+       <Link  className='icon main-color z-2 rounded-circle bg-main-color p-3  text-white' to={`/products/${product._id}`}> 
+       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search-heart-fill" viewBox="0 0 16 16">
+<path d="M6.5 13a6.47 6.47 0 0 0 3.845-1.258h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1A6.47 6.47 0 0 0 13 6.5 6.5 6.5 0 0 0 6.5 0a6.5 6.5 0 1 0 0 13m0-8.518c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018"/>
+</svg></Link>
+      
+     </div>
+   <img height='500px' className='position-absolute h-100 z-0'    src={product.mainImage.secure_url}/>
+      <div
+     className="z-3 info position-absolute s-0 end-0 w-100  d-flex justify-content-between px-3 bg-white rounded-bottom pt-2 align-items-center ">
+      <div class="title-project">
+      <h6 className='py-3'>{product.name}</h6>
+      <p>{product.price}$</p>
+     </div>
+     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="40" fill="currentColor" className="bi bi-heart " viewBox="0 0 16 16">
+     <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+     </svg>
+     </div>
+     
+      
+
+      
+</div>
      </div>
    ):<h2>no product</h2>}
     </div>
     
-  <nav aria-label="Page navigation example">
-  <ul className="pagination">
+  <nav aria-label="Page navigation example" className='d-flex justify-content-center'> 
+  <ul className="pagination py-5">
     <li className="page-item">
-      <button className="page-link" onClick={()=>{getPage(--page)}} aria-label="Previous" disabled={page==1}>
+      <button className="page-link" onClick={
+        async()=>{
+         await setPage(--page);
+         await getPagination(page);
+         }} aria-label="Previous" disabled={page==1}>
         <span aria-hidden="true">«</span>
       </button>
     </li>
     {Array.from({length : product?.total/product?.page}).map((product,index)=>      
-    <li className="page-item" key={index}><button className="page-link" onClick={()=>{getPage(index+1);} }>
+    <li className="page-item" key={index}><button className="page-link"
+     onClick={ async() =>{
+       setPage(index+1);
+      await getPagination(index+1);} }>
       {index+1}</button></li>
 )}
     <li className="page-item">
-      <button className="page-link" onClick={()=>{getPage(++page);}} aria-label="Next" disabled={page== product?.total/product?.page}>
+      <button className="page-link"
+       onClick={async()=>{
+        await setPage(++page);
+        await getPagination(page);
+      }} aria-label="Next" disabled={page== product?.total/product?.page}>
         <span aria-hidden="true">»</span>
       </button>
     </li>
@@ -68,6 +101,9 @@ export default function Pagination() {
 
 
    </div>
+   </section>
+    </div>
+ 
 
   )
 }
