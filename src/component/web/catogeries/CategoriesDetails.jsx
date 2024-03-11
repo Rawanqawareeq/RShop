@@ -31,9 +31,9 @@ export default function CategoriesDetails() {
 </svg></Link>
       
      </div>
-   <img height='500px' className='position-absolute h-100 z-0'    src={product.mainImage.secure_url}/>
+   <img height='500px' className='position-absolute h-100 z-0 w-100 rounded-3'    src={product.mainImage.secure_url}/>
       <div
-     className="z-3 info position-absolute s-0 end-0 w-100  d-flex justify-content-between px-3 bg-white rounded-bottom pt-2 align-items-center ">
+     className="z-3 info position-absolute s-0 end-0 w-100  d-flex justify-content-between px-3 rounded-bottom pt-2 align-items-center ">
       <div class="title-project">
       <h6 className='py-3'>{product.name}</h6>
       <p>{product.price}$</p>

@@ -21,7 +21,7 @@ export default function Catogeries() {
   return (
 
     <>
-    <div className='categories-img container py-5'>
+    <div className='categories-img container p-5 mt-5 py-5'>
       
      <Swiper
         modules={[Navigation, Pagination, Autoplay]}

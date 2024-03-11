@@ -27,9 +27,7 @@
   
 }
 .form .content  a{
-    color: var(--main-colors);
     display: block;
-    text-decoration-line: none;
 }
 .form .content h2{
     border-bottom: 1px solid var(--main-colors);

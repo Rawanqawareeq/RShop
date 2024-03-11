@@ -2,6 +2,9 @@
     --main-colors:#00008B;
     --sec-color:#ADD8E6;
  }
+ .sec-color{
+    background-color: var(--sec-color);
+ }
 .swiper{
     padding: 10px;
 }

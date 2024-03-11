@@ -58,11 +58,15 @@ export default function Review() {
       
       );
   return (
-    <div className='container'>
-    <form onSubmit={formik.handleSubmit}>
+    <>
+    <div className='form mt-5  py-5'>
+
+    <form className='content ms-3 py-5' onSubmit={formik.handleSubmit}>
       {renderInputs}
-      <button type='submit' >Review</button>
+      <button type='submit' className='mt-2 submit'>Review</button>
      </form>
+   
     </div>
+    </>
   )
 }

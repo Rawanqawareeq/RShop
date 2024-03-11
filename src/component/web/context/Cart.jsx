@@ -116,7 +116,7 @@ export default function CartContexProvider({children}) {
 
   
   
-  return <CartContex.Provider value={{addCartContex,getCartContext,removeCartContext,count,getcountCartContext,clearCart,incraseQuantityContext,decraseQuantityContext}}>
+  return <CartContex.Provider value={{addCartContex,getCartContext,removeCartContext,count,setCount,getcountCartContext,clearCart,incraseQuantityContext,decraseQuantityContext}}>
     {children}
   </CartContex.Provider>;
 }

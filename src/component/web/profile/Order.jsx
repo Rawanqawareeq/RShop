@@ -20,20 +20,24 @@ export default function Order() {
    
   
   return (
-    <div>
+    <section  className='order  w-100 py-5'>
   {data?.orders.length? data?.orders.map((order,index)=>
   
   <div key={order._id}>
-    <h2>order {index}</h2>
-<table border='2' key={order._id} > 
-   <tr>
-      <th>address</th>
+    <h2 className='bg-white d-inline '>order {index}</h2>
+<table className="table mt-2" key={order._id}>
+  <thead>
+    <tr>
+    <th>address</th>
       <th>createdAt</th>
       <th>finalPrice</th>
       <th>paymentType</th>
       <th>phoneNumber</th>
       <th>updatedAt</th>
+      <th>status</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
     <td>{order.address}</td>
     <td>{order.createdAt}</td>
@@ -41,12 +45,16 @@ export default function Order() {
     <td>{order.paymentType}</td>
     <td>{order.phoneNumber}</td>
     <td>{order.updatedAt}</td>
+    <td>{order.status}</td>
     </tr>
-    </table>
+   
+  </tbody>
+</table>
+ 
     </div>
  ):<h2>no catogeries</h2>}
     
     
-    </div>
+    </section>
   )
 }

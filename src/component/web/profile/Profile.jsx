@@ -5,12 +5,12 @@ import { Link, Outlet } from 'react-router-dom';
 export default function Profile() {
     
   return (
-    <aside className='profile'>
-        <div className='profile-link' >
+    <aside className='profile py-5  mt-5'>
+        <div className='profile-link ' >
            
-                <nav>
+                <nav  className='py-5 '>
                 <Link to='' >info</Link>
-                <Link to='contact' >contact</Link>
+                <Link to='contact'>contact</Link>
                 <Link to='order' >order</Link>
                 </nav>
            

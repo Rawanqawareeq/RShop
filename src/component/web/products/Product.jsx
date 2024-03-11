@@ -62,33 +62,39 @@ useEffect(()=>{
 },[])
   return (
   <>
-  {isLoading==false?<div className='container py-5 Productsdes ' >
-    <div className='row'>
-      <div className='col-md-12 text-center'>
-       <img src={data.product.mainImage.secure_url} height='500px' ></img>
-       <div className='container py-5'>
-      <div className='row Productsdes-subimg' >  
-     { data.product.subImages.map((img)=> <img src={img.secure_url}  key={img.public_id} />)
-}
-      </div>       
-      </div>
-      <Link to={`/products/${data.product.id}/review`}>add review</Link>
-       <p>avg rating :{[...Array(5)].map((star,index) => {  return <FaStar size={50} color={index < avgrat?'#ffc107':'e4e5e9'} key={index}/>})}</p>
-       <h5 className='pt-5 pe-5 text-start'>{data.product.name}</h5>
+  {isLoading==false?<div className='container-fluid py-5 Productsdes ' >
+    <div className='row  row-gap-5'>
+      <div className='col-md-6 text-center'>
+       <img src={data.product.mainImage.secure_url}  className='h-100' ></img>
+       </div>
+       <div className='col-md-6'>
+      
+      <div className='row Productsdes-subimg py-5' >  
+         <div className='col-md-6' >
+         { data.product.subImages.map((img)=> <img src={img.secure_url}  key={img.public_id} />)}
+         </div>
+         <div className='col-md-6 py-5' >
+         <h5 className='pt-5 pe-5 text-start'>{data.product.name}</h5>
            <p className=' text-start'>{data.product.finalPrice}$</p>
-           {console.log(data)}
+           <p>avg rating :{[...Array(5)].map((star,index) => {  return <FaStar size={50} color={index < avgrat?'#ffc107':'e4e5e9'} key={index}/>})}</p>
            <button className='btn btn-outline-info d-block px-5 m-auto text-center' onClick={()=>addtocart(data.product._id)} >Add to Cart</button>
-      <div className='border-2 border-black '> 
+           <Link  className='mt-5 btn btn-outline-info d-block px-5 m-auto text-center' to={`/products/${data.product.id}/review`}>add review</Link> 
+         </div>
+      </div>
+       </div>
+     
+   
+
+      <div className='col-md-12   review p-5 border-2 border-black '> 
       {data.product.reviews.map((review)=><div key={review._id}>
-      <h3>{review.createdBy.userName}</h3>
+         {data.product.reviews.map((review)=><div className='border border-3 border-black p-5 mt-2' key={review._id}>
+       
+    {/*<h3>{review.createdBy.userName}</h3>*/}
         <p>{review.comment}</p>
        {[...Array(5)].map((star,index) => { return <FaStar size={50} color={index <= review.rating?'#ffc107':'e4e5e9'} key={index}/>})}
        </div>)}
-      </div>
-      </div>
-      <div className='col-md-12 py-5'>
-    
-     
+        
+       </div>)}
       </div>
     </div>
   </div>:<h2>is Loading...</h2>}

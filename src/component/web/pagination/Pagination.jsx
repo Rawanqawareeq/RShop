@@ -7,17 +7,21 @@ import './../catogeries/catogeries.css';
 export default function Pagination() {
     let [product,setproduct] = useState([]);
     let [page,setPage] = useState(1);
-    let [limit,setlimit] = useState(2);
+    let [limit,setlimit] = useState(3);
     let[loading,setLoading] = useState(true);
-    const getPagination =  async(Page=1)=>{
+    const paginationNumbers = [];
+    const getPagination =  async(Page=1,limit=3)=>{
        try{
-        console.log(page);
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${Page}&limit=2`);
+        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${Page}&limit=${limit}`);
+        console.log(data);
         setproduct(data);
         console.log(loading);
         setLoading(false);
         return data;
        }catch(error){}
+    }
+    for (let i = 1; i <= Math.ceil(product.total / limit); i++) {
+           paginationNumbers.push(i);
     }
    
    
@@ -31,12 +35,12 @@ export default function Pagination() {
   return (
     <div>
       <header> <Catogeries/></header>
-        <section className='product py-5'>
+        <section className='product h-100 py-5'>
    
     <div className='container py-5'>
-    <div className='row' >
+    <div className='row row-gap-5' >
     {loading == false ?product.products.map((product)=>
-     <div className='col-md-6' key={product._id} >
+     <div className='col-md-4' key={product._id} >
         <div className=' position-relative products  ' key={product._id}>
     
     <div
@@ -47,10 +51,10 @@ export default function Pagination() {
 </svg></Link>
       
      </div>
-   <img height='500px' className='position-absolute h-100 z-0'    src={product.mainImage.secure_url}/>
+   <img height='500px' className='position-absolute h-100 z-0 w-100 rounded-3'    src={product.mainImage.secure_url}/>
       <div
      className="z-3 info position-absolute s-0 end-0 w-100  d-flex justify-content-between px-3 bg-white rounded-bottom pt-2 align-items-center ">
-      <div class="title-project">
+      <div className="title-project">
       <h6 className='py-3'>{product.name}</h6>
       <p>{product.price}$</p>
      </div>
@@ -78,19 +82,22 @@ export default function Pagination() {
         <span aria-hidden="true">«</span>
       </button>
     </li>
-    {Array.from({length : product?.total/product?.page}).map((product,index)=>      
+    {paginationNumbers.map((index)=>      
     <li className="page-item" key={index}><button className="page-link"
      onClick={ async() =>{
-       setPage(index+1);
-      await getPagination(index+1);} }>
-      {index+1}</button></li>
-)}
+      await setPage(index);
+      await getPagination(index);} }>
+      {index}</button></li>
+)
+     
+}
     <li className="page-item">
       <button className="page-link"
        onClick={async()=>{
         await setPage(++page);
         await getPagination(page);
-      }} aria-label="Next" disabled={page== product?.total/product?.page}>
+
+      }} aria-label="Next" disabled={page== paginationNumbers.length}>
         <span aria-hidden="true">»</span>
       </button>
     </li>
@@ -107,3 +114,15 @@ export default function Pagination() {
 
   )
 }
+/*  
+    {Array.from({length : product?.total/product?.page}).map((product,index)=>      
+    <li className="page-item" key={index}><button className="page-link"
+     onClick={ async() =>{
+       setPage(index+1);
+      await getPagination(index+1);} }>
+      {index+1}</button></li>
+)}
+
+
+
+*/
