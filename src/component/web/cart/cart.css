@@ -157,7 +157,7 @@ font-size:20px;
 }
 
 
- .checkout a, .ClearCart{
+ .checkout a{
     background-color: #141718;
     width:100%;
     display: flex;
@@ -167,7 +167,23 @@ font-size:20px;
     padding: 10px 26px;
     border-radius: 8px;
 }
+.ClearCart{
+    border: 2px black solid;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #141718;
+    color: white;
+  
+}
 
+.ClearCart a{
+    
+    margin: 0 auto;
+    text-align: center;
+    font-size: medium;
+    color: white;
+  
+}
 
 
 .cart .row:last-of-type{

@@ -1,25 +1,42 @@
 
-  .navbar img{
+  .basic_navbar .navbar img{
 
       height: 65px;
   }
-  .navbar-nav .nav-link.active, .navbar-nav .nav-link.show  {
+  .basic_navbar .nav-link.active:not(.cart){
      border-radius: 16px ;
      background-color: var(--sec-color);
-     color: white;
+     color: white !important;
   }
-  .navbar-nav .nav-link .active, .navbar-nav .nav-link.show  {
+  .basic_navbar .nav-link:hover:not(.cart){
     border-radius: 16px ;
     background-color: var(--sec-color);
-    color: white;
+    color:var(--main-colors);
+    opacity: 0.5;
  }
-  .dropdown-item:focus, .dropdown-item:hover {
+
+ .basic_navbar .dropdown-item:focus, .dropdown-item:hover {
       color: white;
       background-color:var(--sec-color) !important;
   }
-  .dropdown-item{
+  .basic_navbar .dropdown-item{
     color: var(--main-colors) !important;
   }
-  .navbar  .nav-link{
+  .basic_navbar .navbar  .nav-link{
       color:var(--main-colors) ;
+      margin-right: 20px;
   }
+  .basic_navbar .nav-item span{
+    background-color: var(--sec-color);
+    left: 30px;
+    top:-5px;
+    width: 25px;
+    height: 25px;
+    color: #0d0d0d;
+    font-size: 13px;
+    text-align: center; 
+    z-index: -1;  
+}
+.basic_navbar .nav-item svg{
+  color: var(--main-colors) !important;
+}

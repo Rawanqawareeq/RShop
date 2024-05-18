@@ -12,7 +12,7 @@ export default function Review() {
 
   const initialValues={
     comment:'',
-    rating:'',
+  
   };
   const onSubmit=async(review)=>{
     const token = localStorage.getItem("UserToken");
@@ -32,13 +32,6 @@ export default function Review() {
       title:'User comment',
       value:formik.values.comment,
 
-    },
-    {
-      id:'rating',
-      type:'text',
-      name:'rating',
-      title :'User rating',
-      value:formik.values.rating,
     }
   ];
   const renderInputs = inputs.map((input,index)=>
@@ -60,9 +53,20 @@ export default function Review() {
   return (
     <>
     <div className='form mt-5  py-5'>
+    
+     
+    <form className='content ms-3 py-5 ' onSubmit={formik.handleSubmit}>
+    <h2 className='mb-3'>Review Product</h2>
 
-    <form className='content ms-3 py-5' onSubmit={formik.handleSubmit}>
       {renderInputs}
+      <label className='d-block '>User rating</label> 
+        <select className='d-block m-auto px-2' name="rating" value={formik.values.rating} onChange={formik.handleChange}>
+         <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+          </select>
       <button type='submit' className='mt-2 submit'>Review</button>
      </form>
    

@@ -20,7 +20,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </CartContexProvider>
     </UserContexProvider>
     </QueryClientProvider>
-    
-
     </>
 )

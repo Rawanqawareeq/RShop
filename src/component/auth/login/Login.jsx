@@ -11,7 +11,6 @@ import '../auth.css';
 export default function Login() {
   let {UserToken,setUserToken} = useContext(UserContex);
     const navigate = useNavigate();
-    
     if(UserToken){
       navigate(-1);
     }
@@ -19,10 +18,11 @@ export default function Login() {
         email:'',
         password:'',
       };
-      
+  
       const onSubmit=async users=>{
        try{
-        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signin`,users);
+        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,users);
+        console.log(data)
         if(data.message == 'success'){
          localStorage.setItem("UserToken",data.token);
          setUserToken(data.token);
@@ -37,7 +37,13 @@ export default function Login() {
             theme: "colored",
             transition: Bounce,
             });
-            navigate('/');
+            if(data.user.role ==  "Admin"){
+              navigate('/dashboard');
+            }
+            else if(data.user.role ==  "User"){
+              navigate('/');
+            }
+           
         }
       }catch(error){
         toast.error('Password or Email not vaild', {

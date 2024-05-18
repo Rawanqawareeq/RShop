@@ -10,12 +10,12 @@ import { Link } from 'react-router-dom';
 
 export default function Catogeries() {
   const getCatogeries = async()=>{
-  const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/categories/active?limit=9`);
+ const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/categories/active`);
    return data;
   }
   const {data,isLoading} = useQuery('web_categories',getCatogeries);
   if(isLoading){
-    return <h2>....is loading</h2>
+    return <div className='loading w-100   vh-100 z-3'><span className="loader "></span></div>
   }
 
   return (
@@ -38,14 +38,14 @@ export default function Catogeries() {
     {data?.categories.length? data?.categories.map((catogory)=>
      
         <SwiperSlide  key={catogory._id}>
-           <Link to={`/products/catogory/${catogory._id}`}>
+           <Link to={`/catogory/${catogory._id}`}>
            <img src={catogory.image.secure_url}/>
            </Link>
         
        </SwiperSlide> 
      
 
-    ):<h2>no catogeries</h2>}
+    ):<h2>no</h2>}
    </Swiper>
    <div className='swiper-custom-pagination'></div>
     </div> 

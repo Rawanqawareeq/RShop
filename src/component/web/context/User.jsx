@@ -18,7 +18,7 @@ export  function UserContexProvider({children}) {
         setIsLoading(false);
       }
       else{
-        return <h2>is loading ... </h2>
+        return <div className='loading w-100   vh-100 z-3'><span className="loader "></span></div>
       }
     }
     useEffect(()=>{

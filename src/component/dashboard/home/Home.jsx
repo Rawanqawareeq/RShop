@@ -1,7 +1,17 @@
 import React from 'react'
 
-export default function Home() {
+function Home() {
   return (
-    <div>Home for admin</div>
-  )
+<>
+<div>
+
+
+  
+</div>
+
+
+
+</>  )
 }
+
+export default Home

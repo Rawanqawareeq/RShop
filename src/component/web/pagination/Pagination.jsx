@@ -29,14 +29,23 @@ export default function Pagination() {
        getPagination(); 
     },[]);
     if(loading){
-      return<h2>loading...</h2>
+      return <div className='loading w-100 vh-100    vh-100 z-3'><span className="loader "></span></div>
     }
 
   return (
-    <div>
+    <div >
       <header> <Catogeries/></header>
         <section className='product h-100 py-5'>
-   
+        <div className="title text-center position-relative   ">
+            <div className=" d-flex justify-content-center align-items-center ">
+              <h2>Welcome</h2>
+              <span className="position-absolute fs-3">Our Product</span>
+              
+            </div>
+            <p className="container-fluid w-75 d-flex mt-4 justify-content-center align-items-center lead">
+            Take care of your body. It's the only place you have to live.
+              </p>
+        </div>
     <div className='container py-5'>
     <div className='row row-gap-5' >
     {loading == false ?product.products.map((product)=>

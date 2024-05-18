@@ -12,13 +12,7 @@ export default function App(){
       getcountCartContext();
     }
   },[])
-  
-
   return (
-
-   
       <RouterProvider router={router} />
-     
-    
     )
 }

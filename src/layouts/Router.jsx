@@ -3,9 +3,8 @@ import{
   createBrowserRouter,
 }from "react-router-dom";
 import Home from '../component/web/home/Home.jsx';
-import DashboardHome from '../component/dashboard/home/Home.jsx';
 import Catogeries from '../component/web/catogeries/Catogeries.jsx';
-import  DashboardCatogeries from '../component/dashboard/catogeries/Catogeries.jsx';
+import  DashboardCatogeries from '../component/dashboard/Category/Category.jsx';
 import DashboardLayout from './DashboardLayout.jsx';
 import Cart from '../component/web/cart/Cart.jsx';
 import Product from '../component/web/products/Product.jsx';
@@ -23,6 +22,8 @@ import Order from '../component/web/profile/Order.jsx';
 import Layouts from './Layouts.jsx';
 import Pagination from '../component/web/pagination/Pagination.jsx';
 import Review from '../component/web/products/Review.jsx';
+import Chat from '../component/web/chat/Chat.jsx';
+import DashboardAddCategory from '../component/dashboard/AddCategory/AddCategory.jsx';
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -53,7 +54,7 @@ export const router = createBrowserRouter([
       element: <Catogeries/>,
     },
     {
-      path: "products/catogory/:catogoryId",
+      path: "catogory/:catogoryId",
       element: <CategoriesDetails/>,
     },
     {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
           <Cart/>
       </ProductRoute>
       
+    },
+    {
+      path:'chat',
+      element:<Chat/>
     },
     {
       path:"checkout",
@@ -114,12 +119,12 @@ export const router = createBrowserRouter([
   element:<DashboardLayout/>,
   children:[
     {
-      path:'home',
-      element:<DashboardHome/>,
+      path:"Category",
+      element:<DashboardCatogeries/>,
     },
     {
-      path: "catogeries",
-      element: <DashboardCatogeries/>,
+      path:"AddCategory",
+      element:<DashboardAddCategory/>,
     },
     {
       path:"*",

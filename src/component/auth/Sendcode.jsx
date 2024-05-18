@@ -18,7 +18,7 @@ export default function Sendcode() {
       };
       
       const onSubmit=async users=>{
-        const {data} = await axios.patch('https://ecommerce-node4.vercel.app/auth/sendcode',users);
+        const {data} = await axios.patch('https://ai-o49a.onrender.com/auth/sendCode',users);
         if(data.message == 'success'){
          localStorage.setItem("UserToken",data.token);
          setUserToken(data.token);

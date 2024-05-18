@@ -18,7 +18,7 @@ export default function ForgetPassword() {
   };
 
   const onSubmit=async users=>{
-    const {data} = await axios.patch('https://ecommerce-node4.vercel.app/auth/forgotPassword',users);
+    const {data} = await axios.patch('https://ai-o49a.onrender.com/auth/forgotPassword',users);
     if(data.message == 'success'){
       formik.resetForm();
       toast.success('Password is Update', {

@@ -11,21 +11,11 @@ export default function Register() {
     userName:'',
     email:'',
     password:'',
-    image:null,
   };
-  const handleFieldChange =(event)=>{
-   formik.setFieldValue("image",event.target.files[0]);
-
-  }
   const onSubmit=async users=>{
-    const formData = new FormData();
-    formData.append("userName",users.userName);
-    formData.append("email",users.email);
-    formData.append("password",users.password);
-    formData.append("image",users.image);
-   
-
-    const {data} = await axios.post('https://ecommerce-node4.vercel.app/auth/signup',formData);
+  try{
+    const {data} = await axios.post('https://ai-o49a.onrender.com/auth/registor',users);
+    console.log(data)
     if(data.message == 'success'){
       formik.resetForm();
       toast.success('Account Creating successfully, Plase verify your email to login', {
@@ -38,8 +28,22 @@ export default function Register() {
         progress: undefined,
         theme: "light",
         });
-    }
-  };
+    }}catch(error){
+      toast.error('Email already exist', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+        });
+      
+      }
+  }
+
   const formik = useFormik({
       initialValues,
       onSubmit,
@@ -67,13 +71,6 @@ export default function Register() {
       name:'password',
       title :'User Password',
       value:formik.values.password,
-    },
-    {
-      id:'image',
-      type:'file',
-      name:'image',
-      title :'User Image ',
-      onChange : handleFieldChange,
     }
   ];
   const renderInputs = inputs.map((input,index)=>
@@ -85,7 +82,7 @@ export default function Register() {
      value={input.value}  
      key={index} 
      errors={formik.errors}
-     onChange={input.onChange||formik.handleChange}
+     onChange={formik.handleChange}
      onBlur={formik.handleBlur}
      touched={formik.touched}
     />
@@ -95,7 +92,7 @@ export default function Register() {
   return (
     <>
     <div className='form container'>
-    <form className='content ms-3 py-5' onSubmit={formik.handleSubmit} encType='multipart/form-data' >
+    <form className='content ms-3 py-5' onSubmit={formik.handleSubmit} >
     <h2 className='mb-3'>create account</h2>
       {renderInputs}
       <button type='submit' className='mt-2 submit'  disabled={!formik.isValid} >Register</button>

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react'
 import { useQuery } from 'react-query';
-
 export default function Order() {
   const getorder =async ()=>{
     try{
@@ -15,17 +14,27 @@ export default function Order() {
   }
   const {data,isLoading} = useQuery('orders',getorder);
   if(isLoading){
-    return <h2>isloading...</h2>
+    return <div className='loading w-100   vh-100 z-3'><span className="loader "></span></div>
+  
   }
    
   
   return (
-    <section  className='order  w-100 py-5'>
-  {data?.orders.length? data?.orders.map((order,index)=>
+    <div className='p-5'>
+             <div className="title text-center position-relative ">
+            <div className=" d-flex justify-content-center align-items-center ">
+              <h2>Welcome</h2>
+              <span className="position-absolute fs-3">MyOrder</span>
+            </div>
+           
+        </div>
+
+       <section  className='order  w-100 py-5'>
+      {data?.orders.length? data?.orders.map((order,index)=>
   
   <div key={order._id}>
-    <h2 className='bg-white d-inline '>order {index}</h2>
-<table className="table mt-2" key={order._id}>
+    <h2 className='bg-white d-inline  border border-3 border-black p-2'>order {index}</h2>
+<table className="table mt-5 mb border border-3 border-black" key={order._id}>
   <thead>
     <tr>
     <th>address</th>
@@ -52,9 +61,14 @@ export default function Order() {
 </table>
  
     </div>
- ):<h2>no catogeries</h2>}
+ ):<h2>no Orders</h2>}
+    
+
     
     
     </section>
+
+    </div>
+   
   )
 }

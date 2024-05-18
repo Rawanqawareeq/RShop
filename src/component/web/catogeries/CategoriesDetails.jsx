@@ -1,21 +1,42 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './catogeries.css';
 export default function CategoriesDetails() {
     const {catogoryId} = useParams();
+ 
     const getCategoriesDetails= async()=>{
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products/category/${catogoryId}`);
+       try{
+        const token = localStorage.getItem('UserToken');
+        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/category/${catogoryId}`,{},{
+          headers:{
+            Authorization:`Rama__${token}`
+          }});
+      
+        console.log(data);
         return data;
+       }catch(error){
+        console.log(error)
+       }
     }
     const {data,isLoading}= useQuery('CategoriesDetails',getCategoriesDetails);
     if(isLoading){
-        return <h2>is Loading ...</h2>
+        return <div className='loading w-100   vh-100 z-3'><span className="loader "></span></div>
     }
   
   return (
-   <section className='product py-5'>
+   <section className='product py-5 mt-5'>
+       <div className="title text-center position-relative   ">
+            <div className=" d-flex justify-content-center align-items-center ">
+              <h2>Welcome</h2>
+              <span className="position-absolute fs-3">Our Product</span>
+              
+            </div>
+            <p className="container-fluid w-75 d-flex mt-4 justify-content-center align-items-center lead">
+            Take care of your body. It's the only place you have to live.
+              </p>
+        </div>
     <div className='container-fluid px-3'>
      <div className='row row-gap-5 py-5'>
     {data?.products.length?data.products.map((product)=>
