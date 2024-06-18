@@ -9,7 +9,7 @@ export default function Layouts() {
     return (
         <>
             <Navbar />
-            <Outlet />
+            <Outlet className="mt-5" />
             <Footer/>
         </>
     )

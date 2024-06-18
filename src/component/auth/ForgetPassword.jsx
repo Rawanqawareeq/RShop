@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useFormik } from 'formik';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,15 +9,19 @@ import Input from '../pages/Input.jsx';
 import { forgetpasswordSchema} from '../web/validate/Validate.js';
 import './auth.css';
 export default function ForgetPassword() {
+  const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
   const initialValues={
     userName:'',
     email:'',
     password:'',
+    confirmPassword:'',
     code:'',
   };
 
   const onSubmit=async users=>{
+    setIsLoading(true);
+   try{
     const {data} = await axios.patch('https://ai-o49a.onrender.com/auth/forgotPassword',users);
     if(data.message == 'success'){
       formik.resetForm();
@@ -32,7 +36,23 @@ export default function ForgetPassword() {
         theme: "light",
         });
         navigate('/login');
+    }}catch(error){
+      toast.error('Code in Wrong', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+        });
+
+    }finally{
+      setIsLoading(false);
     }
+   
   };
   const formik = useFormik({
       initialValues,
@@ -49,6 +69,13 @@ export default function ForgetPassword() {
 
     },
     {
+      id:'code',
+      type:'text',
+      name:'code',
+      title :'Code',
+      value:formik.values.code,
+    },
+    {
       id:'password',
       type:'password',
       name:'password',
@@ -56,13 +83,13 @@ export default function ForgetPassword() {
       value:formik.values.password,
     },
     {
-        id:'code',
-        type:'text',
-        name:'code',
-        title :'Code',
-        value:formik.values.code,
-      },
-  
+      id:'confirmPassword',
+      type:'password',
+      name:'confirmPassword',
+      title :'Confirm Password',
+      value:formik.values.confirmPassword,
+    }
+   
   ];
   const renderInputs = inputs.map((input,index)=>
     <Input  
@@ -86,7 +113,7 @@ export default function ForgetPassword() {
     <form className='content ms-3 py-5'  onSubmit={formik.handleSubmit}  >
     <h2 className='mb-3'>Enter Infromation</h2>
       {renderInputs}
-      <button type='submit' disabled={!formik.isValid} className='mt-2 submit' >Upadte</button>
+      <button type='submit' disabled={!formik.isValid|| isLoading ? "disabled" : ""} className='mt-2 submit' >{!isLoading?"Upadte":"wating.."}</button>
      </form>
     </div>
     

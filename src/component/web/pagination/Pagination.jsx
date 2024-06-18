@@ -1,26 +1,70 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useQuery } from 'react-query'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import Catogeries from '../catogeries/Catogeries.jsx';
 import './../catogeries/catogeries.css';
+import { CartContex } from '../context/Cart.jsx';
+import { Bounce, toast } from 'react-toastify';
 export default function Pagination() {
+
     let [product,setproduct] = useState([]);
     let [page,setPage] = useState(1);
-    let [limit,setlimit] = useState(3);
+    let [limit,setlimit] = useState(6);
     let[loading,setLoading] = useState(true);
     const paginationNumbers = [];
-    const getPagination =  async(Page=1,limit=3)=>{
+    const {addCartContex}= useContext(CartContex);
+    const addtocart  = async (productid)=>{
+     try{
+      const res = await addCartContex(productid);
+      console.log(res);
+      
+      if(res.message == 'success'){
+        toast.success('Product Add successfuly', {
+           position: "top-center",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+           theme: "colored",
+           transition: Bounce,
+           });
+       }
+      return res;
+     }catch(error){
+      toast.error('Product already exist', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+        });
+     }
+    
+  
+  }
+    const getPagination =  async(Page=1,limit=6)=>{
+      setLoading(true);
        try{
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${Page}&limit=${limit}`);
+        const token = localStorage.getItem('UserToken');
+       const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${page}&limit=${limit}`);
+       // const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${Page}&limit=${limit}`);
         console.log(data);
         setproduct(data);
         console.log(loading);
         setLoading(false);
         return data;
-       }catch(error){}
+       }catch(error){
+        console.log(error)
+       }finally{
+        setLoading(false);
+       }
     }
-    for (let i = 1; i <= Math.ceil(product.total / limit); i++) {
+    for (let i = 1; i <= Math.ceil(product.count / limit); i++) {
            paginationNumbers.push(i);
     }
    
@@ -34,7 +78,6 @@ export default function Pagination() {
 
   return (
     <div >
-      <header> <Catogeries/></header>
         <section className='product h-100 py-5'>
         <div className="title text-center position-relative   ">
             <div className=" d-flex justify-content-center align-items-center ">
@@ -48,8 +91,8 @@ export default function Pagination() {
         </div>
     <div className='container py-5'>
     <div className='row row-gap-5' >
-    {loading == false ?product.products.map((product)=>
-     <div className='col-md-4' key={product._id} >
+    {loading == false ?product?.products?.map((product)=>
+     <div className='col-md-4  col-sm-6' key={product._id} >
         <div className=' position-relative products  ' key={product._id}>
     
     <div
@@ -67,9 +110,11 @@ export default function Pagination() {
       <h6 className='py-3'>{product.name}</h6>
       <p>{product.price}$</p>
      </div>
-     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="40" fill="currentColor" className="bi bi-heart " viewBox="0 0 16 16">
-     <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-     </svg>
+    <Link  className='text-white'  onClick={()=>addtocart(product._id)} >
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+    </svg>
+    </Link>
      </div>
      
       
@@ -123,15 +168,3 @@ export default function Pagination() {
 
   )
 }
-/*  
-    {Array.from({length : product?.total/product?.page}).map((product,index)=>      
-    <li className="page-item" key={index}><button className="page-link"
-     onClick={ async() =>{
-       setPage(index+1);
-      await getPagination(index+1);} }>
-      {index+1}</button></li>
-)}
-
-
-
-*/

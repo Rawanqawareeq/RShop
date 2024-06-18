@@ -24,6 +24,19 @@ import Pagination from '../component/web/pagination/Pagination.jsx';
 import Review from '../component/web/products/Review.jsx';
 import Chat from '../component/web/chat/Chat.jsx';
 import DashboardAddCategory from '../component/dashboard/AddCategory/AddCategory.jsx';
+import LoginUser from "../component/dashboard/Login/Login.jsx";
+import UserPage from "../component/dashboard/Users/Users.jsx";
+import UpdateUser from "../component/dashboard/Update/UpdateUser.jsx";
+import AllProducts from "../component/dashboard/Products/Products.jsx";
+import UpdateCategory from "../component/dashboard/UpdateCategory/UpdateCategory.jsx";
+import AddProducts from "../component/dashboard/AddProduct/AddProducts.jsx";
+import Orders from "../component/dashboard/Orders/Orders.jsx";
+import OrderProduct from "../component/dashboard/OrderProduct/OrderProduct.jsx";
+import OrderStatus from "../component/dashboard/OrderStatus/OrderStatus.jsx"
+import UpdateProducts from '../component/dashboard/UpdateProduct/UpdateProducts.jsx';
+import CategoryProducts from '../component/dashboard/ProductWithCate/CategoryProducts.jsx';
+import AddProWCate from '../component/dashboard/AddProWCate/AddProWCate.jsx';
+import Admin from '../component/dashboard/Admin/Admin.jsx'
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -54,12 +67,12 @@ export const router = createBrowserRouter([
       element: <Catogeries/>,
     },
     {
-      path: "catogory/:catogoryId",
+      path: "catogeries/:catogoryId",
       element: <CategoriesDetails/>,
     },
     {
       path: "products/:productsId",
-      element: <Product />,
+      element: <Product/>,
     },
     {
       path: "products",
@@ -119,12 +132,65 @@ export const router = createBrowserRouter([
   element:<DashboardLayout/>,
   children:[
     {
+      path:"/dashboard/",
+      element:<Admin/>,
+    },
+    {
       path:"Category",
       element:<DashboardCatogeries/>,
+    },
+
+    {
+      path:"AddProWCate",
+      element:<AddProWCate/>,
     },
     {
       path:"AddCategory",
       element:<DashboardAddCategory/>,
+    },
+    {
+      path:"CategoryProducts",
+      element:<CategoryProducts/>,
+    },
+    {
+      path:"AddProducts",
+      element:<AddProducts/>,
+    },
+    {
+      path:"AddUser",
+      element:<LoginUser/>,
+    },
+    {
+      path:"AllProducts",
+      element:<AllProducts/>,
+    },
+    {
+      path:"UpdateUser",
+      element:<UpdateUser/>,
+    },
+    {
+      path:"UpdateCategory",
+      element:<UpdateCategory/>,
+    },
+    {
+      path:"UpdateProducts",
+      element:<UpdateProducts/>,
+    },
+    {
+      path:"Users",
+      element:<UserPage/>,
+    },
+    {
+      path:"Orders",
+      element:<Orders/>,
+    },
+    {
+      path:"OrderProduct",
+      element:<OrderProduct/>,
+    },
+    {
+      path:"OrderStatus",
+      element:<OrderStatus/>,
     },
     {
       path:"*",

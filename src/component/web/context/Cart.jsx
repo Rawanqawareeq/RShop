@@ -8,14 +8,19 @@ export const CartContex = createContext(null);
 
 export default function CartContexProvider({children}) {
    let [count,setCount] = useState(0);
+  
   const addCartContex = async (productId)=>{
     try{
           const token = localStorage.getItem("UserToken");
           const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/cart`,
           {productId},
-          {headers:{Authorization:`Tariq__${token}`}});
+          {headers:{Authorization:`Rama__${token}`}});
           getCartContext();
-          setCount(++count);
+          if(data.message == 'success'){
+            setCount(++count);
+          }
+
+        
             return data;
     }catch(error){
        
@@ -26,7 +31,8 @@ export default function CartContexProvider({children}) {
     try{
          const token = localStorage.getItem("UserToken");
          const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/cart`,
-         {headers:{Authorization:`Tariq__${token}`}});
+         {headers:{Authorization:`Rama__${token}`}});
+         console.log(data);
          return data;
     }catch(error){
         
@@ -58,9 +64,9 @@ export default function CartContexProvider({children}) {
        let countproduct = count - getproduct.quantity; 
 
       const token = localStorage.getItem('UserToken');
-      const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/removeItem`,
-      {productId},
-      {headers:{Authorization:`Tariq__${token}`}});
+      const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/cart/${productId}`,
+      {},
+      {headers:{Authorization:`Rama__${token}`}});
       setCount(countproduct);
       return data;
     }catch(error){
@@ -85,27 +91,54 @@ export default function CartContexProvider({children}) {
   else{
     try{
       const token = localStorage.getItem('UserToken');
-      const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/clear`,{},
-      {headers:{authorization:`Tariq__${token}`}})
+      const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/cart/clear`,{},
+      {headers:{authorization:`Rama__${token}`}});
+      if(data.message == 'success' ){
+        setCount(0);
+        toast.success('The cart clear sussefully', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+          });
+      }
       return data;
      }catch(error){
       console.log(error);
      }
   }}
-  const incraseQuantityContext= async(productId)=>{
+  const incraseQuantityContext= async(productId,quantity)=>{
+   
     const token = localStorage.getItem('UserToken');
-    const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/incraseQuantity`,{productId},
-    {headers:{authorization:`Tariq__${token}`}});
+    const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/cart/updateQuantity/${productId}`,{
+      "quantity":"1",
+        "op":"+"
+    },
+    {headers:{authorization:`Rama__${token}`}});
     getCartContext();
-    setCount(++count);
+    if(data.message == 'success'){
+      setCount(++count);
+    }
     return data;
 
   }
-  const decraseQuantityContext= async(productId)=>{
+  const decraseQuantityContext= async(productId,quantity)=>{
     const token = localStorage.getItem('UserToken');
-    const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/decraseQuantity`,{productId},
-     {headers:{authorization:`Tariq__${token}`}}); 
-    setCount(--count);
+    const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/cart/updateQuantity/${productId}`,{
+      "quantity":"1",
+        "op":"-"
+    },
+    {headers:{authorization:`Rama__${token}`}});
+    getCartContext();
+    if(data.message == 'success'){
+      setCount(--count);
+    }
+   
     return data;
   }
  

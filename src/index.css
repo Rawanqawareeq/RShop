@@ -5,7 +5,9 @@
  .sec-color{
     background-color: var(--sec-color);
  }
-
+ svg {
+  background-color: transparent;
+}
 .swiper{
     padding: 10px;
 }

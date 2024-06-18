@@ -12,7 +12,7 @@ export  function UserContexProvider({children}) {
 
     const getUserData = async ()=>{
       if(UserToken){
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`,{headers:{authorization:`Tariq__${UserToken}`}})
+        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/users/userData`,{headers:{authorization:`Rama__${UserToken}`}})
         setUserData(data.user);
         console.log(data);
         setIsLoading(false);

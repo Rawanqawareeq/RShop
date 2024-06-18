@@ -1,26 +1,29 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { validationOrderSchema } from '../web/validate/Validate';
 import Input from '../pages/Input';
 import { useNavigate } from 'react-router-dom';
 import { CartContex } from '../web/context/Cart.jsx';
+import { Bounce, toast } from 'react-toastify';
 
 export default function Ckeckout() {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     let{setCount} = useContext(CartContex);
     const initialValues={
-        couponName:'',
         address:'',
         phone:'',
-
       };
 const onSubmit = async orders =>{
+  setIsLoading(true);
+
     try{
         const token =  localStorage.getItem('UserToken');
     const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/order`,orders,
-    {headers:{authorization:`Tariq__${token}`}});
+    {headers:{authorization:`Rama__${token}`}});
     setCount(0);
+    console.log(data);
     if(data.message == 'success'){
         toast.success('The Order create successfully', {
             position: "top-center",
@@ -36,8 +39,10 @@ const onSubmit = async orders =>{
     }
     }catch(error){
         console.log(error);
+    }finally{
+      setIsLoading(false);
     }
-    navigate('/');
+    navigate('/products');
 }
 const formik = useFormik({
     initialValues,
@@ -45,13 +50,12 @@ const formik = useFormik({
     validationSchema:validationOrderSchema
   });
   const inputs =[
-    { 
-      id:'couponName',
-      type: 'text',
-      name:'couponName',
-      title:'Coupon Name',
-      value:formik.values.couponName,
-
+    {
+      id:'phone',
+      type:'text',
+      name:'phone',
+      title :'User phone',
+      value:formik.values.phone,
     },
     {
       id:'address',
@@ -59,14 +63,8 @@ const formik = useFormik({
       name:'address',
       title :'User Address',
       value:formik.values.address,
-    },
-    {
-      id:'phone',
-      type:'text',
-      name:'phone',
-      title :'User phone',
-      value:formik.values.phone,
     }
+    
   ];
   const renderInputs = inputs.map((input,index)=>
   <Input 
@@ -91,7 +89,7 @@ const formik = useFormik({
         <h2 className='mb-3'>Ckeckout Cart</h2>
 
           {renderInputs}
-          <button type='submit' className='mt-2 submit' >Order</button>
+          <button type='submit' className='mt-2 submit' disabled={!formik.isValid || isLoading ? "disabled" : ""}>{!isLoading?"Order":"wating.."}</button>
          </form>
          </div>
     </>

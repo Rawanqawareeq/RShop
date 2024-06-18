@@ -10,7 +10,6 @@ export default function Userinfo() {
   return (
     <div className='p-5'>
     <h2 className='p-5'>{userData.userName}</h2>
-    <img  src={userData.image.secure_url}/>
     </div>
   )
 }

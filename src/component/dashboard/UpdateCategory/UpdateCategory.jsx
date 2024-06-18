@@ -44,7 +44,7 @@ function UpdateCategory() {
     
    
    try {
-    const token = localStorage.getItem('userToken');
+    const token = localStorage.getItem('UserToken');
     const formData = new FormData();
 
     formData.append('name', category.name);
@@ -71,7 +71,7 @@ function UpdateCategory() {
         theme: "colored",
         transition: Bounce,
         });
-        navigate('/Category');
+        navigate('/dashboard/Category');
     }
    } 
 
@@ -87,15 +87,15 @@ function UpdateCategory() {
      <h1>Update Category</h1>
     <div className='container pagesignin1'>
     
-      <div className="sign">
+      <div className="sign updateForm">
 
       <form onSubmit={handleSubmit}>
         
-      <label>Your Name</label>
-        <input type="text" name="name" value={category.name}  onChange={handleChange} />
+      <label>Category Name</label>
+        <input type="text" className='inputText' name="name" value={category.name}  onChange={handleChange} />
 
         <label>Category Status</label> 
-        <select name="status" value={category.status} onChange={handleChange}>
+        <select className='selectStatus' name="status" value={category.status} onChange={handleChange}>
          <option value="Active">Active</option>
         <option value="NotActive">Not Active</option>
           </select>
