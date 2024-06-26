@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import UserContext from '../context/User';
+import UserContext from '../context/User.jsx';
 import {CartContex} from '../context/Cart.jsx';
 import './navbar.css';
 

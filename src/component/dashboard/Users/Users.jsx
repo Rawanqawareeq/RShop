@@ -91,7 +91,7 @@ function Users() {
     <>
       {loader == false ? (
         <div
-          className="usersTabel col Userss h-100"
+          className="usersTabel col Userss"
           style={{ height: 550, backgroundColor: " #e7eff1" }}
         >
           <div class="table-responsive">
