@@ -35,7 +35,7 @@ function Orders() {
     }>
           <thead>
             <th scope="col" className="text-center">
-              User Name
+              Order ID
             </th>
             <th scope="col" className="text-center">
               User ID
