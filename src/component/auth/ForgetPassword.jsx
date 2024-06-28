@@ -12,7 +12,6 @@ export default function ForgetPassword() {
   const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
   const initialValues={
-    userName:'',
     email:'',
     password:'',
     confirmPassword:'',
@@ -22,7 +21,7 @@ export default function ForgetPassword() {
   const onSubmit=async users=>{
     setIsLoading(true);
    try{
-    const {data} = await axios.patch('https://ai-o49a.onrender.com/auth/forgotPassword',users);
+    const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/auth/forgotPassword`,users);
     if(data.message == 'success'){
       formik.resetForm();
       toast.success('Password is Update', {
